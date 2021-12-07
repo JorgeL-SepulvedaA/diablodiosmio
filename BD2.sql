@@ -118,13 +118,12 @@ Select* from Transacciones;
 
 select *from Historial_Prestamos;
 
+select *from Historial_Credito;
 
 ALTER TABLE Tarjetas_Credito ADD Limite INT;
 
 ALTER TABLE Usuarios ADD Status Char(1);
 
 ALTER TABLE Historial_Prestamos ALTER COLUMN Fecha DATETIME;
-
-ALTER TABLE Historial_Prestamos ALTER COLUMN Id_prestamo ;
 
 insert into Usuarios values ('Erick', 'Betances', 'erickbetances209@gmail.com', 'Erick', '40212486837', 'Villa Consuelo', 'Administrador', 'A')

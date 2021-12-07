@@ -195,5 +195,33 @@ namespace DATOS
             bd.SaveChanges();
         }
 
+        public void pagartarjeta()
+        {
+            Tarjetas_Credito tarjetas_Credito = bd.Tarjetas_Credito.Where(d => d.Id_usuario == id_tarjeta).First();
+
+            tarjetas_Credito.Monto_Disponible = montod;
+            tarjetas_Credito.Balance_Consumido = montoc;
+
+            Cuenta_ahorro cuenta_Ahorro = bd.Cuenta_ahorro.Where(d => d.Numero_cuenta == cuenta).First();
+
+            cuenta_Ahorro.Saldo = saldo;
+
+            Transacciones status = new Transacciones();
+
+            status.Numero_cuenta = cuenta;
+
+            status.Monto = transferencia;
+            status.Tipo = "Pago tarjeta";
+            DateTime dateTime = DateTime.Now;
+            status.Fecha = dateTime;
+
+
+            bd.Transacciones.Add(status);
+            bd.Entry(cuenta_Ahorro).State = System.Data.Entity.EntityState.Modified;
+            bd.Entry(tarjetas_Credito).State = System.Data.Entity.EntityState.Modified;
+            bd.SaveChanges();
+
+        }
+
     }
 }
