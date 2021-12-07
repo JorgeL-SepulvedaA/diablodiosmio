@@ -15,12 +15,15 @@
         </EntityType>
         <EntityType Name="Historial_Credito">
           <Key>
-            <PropertyRef Name="Numero_tarjeta" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Numero_tarjeta" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Balance_Cons" Type="varchar" MaxLength="100" />
-          <Property Name="Monto_Disp" Type="varchar" MaxLength="100" />
-          <Property Name="Fecha" Type="varchar" MaxLength="100" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Numero_Tarjeta" Type="varchar" MaxLength="100" />
+          <Property Name="Monto" Type="varchar" MaxLength="100" />
+          <Property Name="Concepto" Type="varchar" MaxLength="100" />
+          <Property Name="Restante" Type="varchar" MaxLength="100" />
+          <Property Name="Monto_disponible" Type="varchar" MaxLength="100" />
+          <Property Name="Fecha" Type="datetime" />
         </EntityType>
         <EntityType Name="Historial_Prestamos">
           <Key>
@@ -168,14 +171,14 @@ advertencia 6002: La tabla o vista 'Banco.dbo.CvTarjetas' no tiene definida ning
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Usuario_HCredito">
-          <End Role="Tarjetas_Credito" Type="Self.Tarjetas_Credito" Multiplicity="1" />
-          <End Role="Historial_Credito" Type="Self.Historial_Credito" Multiplicity="0..1" />
+          <End Role="Tarjetas_Credito" Type="Self.Tarjetas_Credito" Multiplicity="0..1" />
+          <End Role="Historial_Credito" Type="Self.Historial_Credito" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tarjetas_Credito">
               <PropertyRef Name="Numero_Tarjeta" />
             </Principal>
             <Dependent Role="Historial_Credito">
-              <PropertyRef Name="Numero_tarjeta" />
+              <PropertyRef Name="Numero_Tarjeta" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -215,6 +218,37 @@ advertencia 6002: La tabla o vista 'Banco.dbo.CvTarjetas' no tiene definida ning
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="BancoModelStoreContainer">
           <EntitySet Name="Cuenta_ahorro" EntityType="Self.Cuenta_ahorro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Historial_Credito" EntityType="Self.Historial_Credito" Schema="dbo" store:Type="Tables" />
@@ -310,12 +344,15 @@ advertencia 6002: La tabla o vista 'Banco.dbo.CvTarjetas' no tiene definida ning
         </EntityType>
         <EntityType Name="Historial_Credito">
           <Key>
-            <PropertyRef Name="Numero_tarjeta" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Numero_tarjeta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Balance_Cons" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Monto_Disp" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Numero_Tarjeta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Monto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Concepto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Restante" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Monto_disponible" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Tarjetas_Credito" Relationship="Self.FK_Usuario_HCredito" FromRole="Historial_Credito" ToRole="Tarjetas_Credito" />
         </EntityType>
         <EntityType Name="Historial_Prestamos">
@@ -465,14 +502,14 @@ advertencia 6002: La tabla o vista 'Banco.dbo.CvTarjetas' no tiene definida ning
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Usuario_HCredito">
-          <End Role="Tarjetas_Credito" Type="Self.Tarjetas_Credito" Multiplicity="1" />
-          <End Role="Historial_Credito" Type="Self.Historial_Credito" Multiplicity="0..1" />
+          <End Role="Tarjetas_Credito" Type="Self.Tarjetas_Credito" Multiplicity="0..1" />
+          <End Role="Historial_Credito" Type="Self.Historial_Credito" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tarjetas_Credito">
               <PropertyRef Name="Numero_Tarjeta" />
             </Principal>
             <Dependent Role="Historial_Credito">
-              <PropertyRef Name="Numero_tarjeta" />
+              <PropertyRef Name="Numero_Tarjeta" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -549,7 +586,48 @@ advertencia 6002: La tabla o vista 'Banco.dbo.CvTarjetas' no tiene definida ning
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Tarjetas_Credito" EntitySet="Tarjetas_Credito" />
           </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(BancoModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(BancoModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -568,9 +646,12 @@ advertencia 6002: La tabla o vista 'Banco.dbo.CvTarjetas' no tiene definida ning
           <EntitySetMapping Name="Historial_Credito">
             <EntityTypeMapping TypeName="BancoModel.Historial_Credito">
               <MappingFragment StoreEntitySet="Historial_Credito">
-                <ScalarProperty Name="Numero_tarjeta" ColumnName="Numero_tarjeta" />
-                <ScalarProperty Name="Balance_Cons" ColumnName="Balance_Cons" />
-                <ScalarProperty Name="Monto_Disp" ColumnName="Monto_Disp" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Numero_Tarjeta" ColumnName="Numero_Tarjeta" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+                <ScalarProperty Name="Restante" ColumnName="Restante" />
+                <ScalarProperty Name="Monto_disponible" ColumnName="Monto_disponible" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -698,6 +779,30 @@ advertencia 6002: La tabla o vista 'Banco.dbo.CvTarjetas' no tiene definida ning
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="BancoModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="BancoModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="BancoModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="BancoModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BancoModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="BancoModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BancoModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="BancoModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="BancoModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

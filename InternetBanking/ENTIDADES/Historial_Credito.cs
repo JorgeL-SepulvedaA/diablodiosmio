@@ -14,10 +14,13 @@ namespace ENTIDADES
     
     public partial class Historial_Credito
     {
-        public string Numero_tarjeta { get; set; }
-        public string Balance_Cons { get; set; }
-        public string Monto_Disp { get; set; }
-        public string Fecha { get; set; }
+        public int Id { get; set; }
+        public string Numero_Tarjeta { get; set; }
+        public string Monto { get; set; }
+        public string Concepto { get; set; }
+        public string Restante { get; set; }
+        public string Monto_disponible { get; set; }
+        public Nullable<System.DateTime> Fecha { get; set; }
     
         public virtual Tarjetas_Credito Tarjetas_Credito { get; set; }
     }

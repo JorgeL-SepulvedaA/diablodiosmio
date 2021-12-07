@@ -14,13 +14,20 @@ namespace ENTIDADES
     
     public partial class Tarjetas_Credito
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Tarjetas_Credito()
+        {
+            this.Historial_Credito = new HashSet<Historial_Credito>();
+        }
+    
         public Nullable<int> Id_usuario { get; set; }
         public string Numero_Tarjeta { get; set; }
         public string Balance_Consumido { get; set; }
         public string Monto_Disponible { get; set; }
         public Nullable<int> Limite { get; set; }
     
-        public virtual Historial_Credito Historial_Credito { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Historial_Credito> Historial_Credito { get; set; }
         public virtual Usuarios Usuarios { get; set; }
     }
 }

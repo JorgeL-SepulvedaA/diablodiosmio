@@ -71,16 +71,15 @@ namespace NEGOCIOS
         public void consumotarjeta(int n, string md, string mc)
         {
             Clientedatos.consumotarjeta(n, md, mc);
-
         }
-
         public void transferiracuenta(int id_tarjeta, string montod, string montoc, string cuenta, string transferencia, string saldo)
         {
-            Clientedatos.transferiracuenta(id_tarjeta, montod, montoc, cuenta, transferencia, saldo);
-        
+            Clientedatos.transferiracuenta(id_tarjeta, montod, montoc, cuenta, transferencia, saldo);        
         }
-
-
+        public void pagartarjeta(int id_tarjeta, string montod, string montoc, string cuenta, string transferencia, string saldo)
+        {
+            Clientedatos.pagartarjeta(id_tarjeta, montod, montoc, cuenta, transferencia, saldo);
+        }
         public List<Historial_Prestamos> Historialprestamo(int Id)
         {
             return Clientedatos.Historialprestamo(Id);

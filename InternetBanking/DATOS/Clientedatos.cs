@@ -191,7 +191,7 @@ namespace DATOS
             bd.SaveChanges();
         }
 
-        public void pagartarjeta()
+        public void pagartarjeta(int id_tarjeta, string montod, string montoc, string cuenta, string transferencia, string saldo)
         {
             Tarjetas_Credito tarjetas_Credito = bd.Tarjetas_Credito.Where(d => d.Id_usuario == id_tarjeta).First();
 
@@ -207,7 +207,7 @@ namespace DATOS
             status.Numero_cuenta = cuenta;
 
             status.Monto = transferencia;
-            status.Tipo = "Pago tarjeta";
+            status.Tipo = "Pago tarjeta de credito";
             DateTime dateTime = DateTime.Now;
             status.Fecha = dateTime;
 
