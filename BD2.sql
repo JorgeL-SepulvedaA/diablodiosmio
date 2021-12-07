@@ -64,11 +64,14 @@ CONSTRAINT FK_Usuario_HAhorro FOREIGN KEY (Numero_cuenta) REFERENCES Cuenta_ahor
 
 CREATE TABLE Historial_Credito
 (
-Numero_tarjeta VARCHAR (100) PRIMARY KEY,
-Balance_Cons VARCHAR(100),
-Monto_Disp VARCHAR(100),
-Fecha VARCHAR(100)
-CONSTRAINT FK_Usuario_HCredito FOREIGN KEY (Numero_tarjeta) REFERENCES Tarjetas_credito (Numero_tarjeta)
+Id INT IDENTITY (1,1) PRIMARY KEY,
+Numero_Tarjeta VARCHAR(100),
+Monto VARCHAR(100),
+Concepto VARCHAR (100),
+Restante VARCHAR(100),
+Monto_disponible VARCHAR(100),
+Fecha DATETIME,
+CONSTRAINT FK_Usuario_HCredito FOREIGN KEY (Numero_Tarjeta) REFERENCES Tarjetas_Credito (Numero_Tarjeta)
 );
 
 CREATE VIEW CvCuentas
