@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ENTIDADES.CvTarjetas>
+
+@{
+    ViewBag.Title = "VistaTarjetas";
+}
+
+<h2>VistaTarjetas</h2>
+
+<p>
+    @Html.ActionLink("Nueva", "CrearTarjeta")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id_usuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Numero_Tarjeta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Monto_Disponible)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Balance_Consumido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cedula)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id_usuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Numero_Tarjeta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Monto_Disponible)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Balance_Consumido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cedula)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Tarjeta";
+}
+
+<h2>Tarjeta</h2>
+
+<h3>Numero de la tarjeta: #@ViewBag.numero</h3>
+<h3>Limite: $@ViewBag.limite</h3>
+<h3>Monto disponible: $@ViewBag.monto</h3>
+<h3>Monto consumido: $@ViewBag.consumido</h3>
+
+<a class="btn btn-primary" href="/Cliente/Inicio">INICIO</a>
+<a class="btn btn-primary" href="/Cliente/ConsumoTarjeta">Consumir</a>
+<a class="btn btn-primary" href="/Cliente/AvanceEfectivo">Transferir</a>

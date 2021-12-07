@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Inicio";
+}
+
+<div >
+    <h1 align="center">Internet Banking Personal</h1>
+
+    <div class="container">
+        <form align="center" action="/Usuario/Login" method="post">
+            <div style="" class="form-group">
+                <label>Ingresa tu email:</label>
+                <br />
+                <input align="center" type="text" name="email" value="" />
+            </div>
+            <div class="form-group">
+                <label align="center">Ingresa tu contraseña:</label>
+                <br />
+                <input align="center" type="password" name="contraseña" value="" />
+            </div>
+            <div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-outline-success">Iniciar sesion</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

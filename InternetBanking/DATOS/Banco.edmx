@@ -1,0 +1,724 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BancoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cuenta_ahorro">
+          <Key>
+            <PropertyRef Name="Numero_cuenta" />
+          </Key>
+          <Property Name="Id_usuario" Type="int" />
+          <Property Name="Numero_cuenta" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Saldo" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Historial_Credito">
+          <Key>
+            <PropertyRef Name="Numero_tarjeta" />
+          </Key>
+          <Property Name="Numero_tarjeta" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Balance_Cons" Type="varchar" MaxLength="100" />
+          <Property Name="Monto_Disp" Type="varchar" MaxLength="100" />
+          <Property Name="Fecha" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Historial_Prestamos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_prestamo" Type="int" />
+          <Property Name="Monto" Type="varchar" MaxLength="100" />
+          <Property Name="Concepto" Type="varchar" MaxLength="100" />
+          <Property Name="Restante" Type="varchar" MaxLength="100" />
+          <Property Name="Fecha" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Prestamos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id_usuario" Type="int" />
+          <Property Name="Monto_pendiente" Type="int" />
+          <Property Name="Cuotas" Type="varchar" MaxLength="100" />
+          <Property Name="Estatus" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tarjetas_Credito">
+          <Key>
+            <PropertyRef Name="Numero_Tarjeta" />
+          </Key>
+          <Property Name="Id_usuario" Type="int" />
+          <Property Name="Numero_Tarjeta" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Balance_Consumido" Type="varchar" MaxLength="100" />
+          <Property Name="Monto_Disponible" Type="varchar" MaxLength="100" />
+          <Property Name="Limite" Type="int" />
+        </EntityType>
+        <EntityType Name="Transacciones">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Numero_cuenta" Type="varchar" MaxLength="100" />
+          <Property Name="Tipo" Type="varchar" MaxLength="100" />
+          <Property Name="Monto" Type="varchar" MaxLength="100" />
+          <Property Name="Fecha" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" />
+          <Property Name="Apellido" Type="varchar" MaxLength="100" />
+          <Property Name="Correo" Type="varchar" MaxLength="100" />
+          <Property Name="Contraseña" Type="varchar" MaxLength="100" />
+          <Property Name="Cedula" Type="varchar" MaxLength="15" />
+          <Property Name="Direccion" Type="varchar" MaxLength="100" />
+          <Property Name="Rol" Type="varchar" MaxLength="20" />
+          <Property Name="Status" Type="char" MaxLength="1" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Banco.dbo.CvClientes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="CvClientes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" />
+          <Property Name="Apellido" Type="varchar" MaxLength="100" />
+          <Property Name="Cedula" Type="varchar" MaxLength="15" />
+          <Property Name="Correo" Type="varchar" MaxLength="100" />
+          <Property Name="Contraseña" Type="varchar" MaxLength="100" />
+          <Property Name="Direccion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Banco.dbo.CvCuentas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="CvCuentas">
+          <Key>
+            <PropertyRef Name="Numero_cuenta" />
+          </Key>
+          <Property Name="Id_usuario" Type="int" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" />
+          <Property Name="Apellido" Type="varchar" MaxLength="100" />
+          <Property Name="Cedula" Type="varchar" MaxLength="15" />
+          <Property Name="Numero_cuenta" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Saldo" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Banco.dbo.CvPrestamos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="CvPrestamos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id_usuario" Type="int" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" />
+          <Property Name="Apellido" Type="varchar" MaxLength="100" />
+          <Property Name="Cedula" Type="varchar" MaxLength="15" />
+          <Property Name="Cuotas" Type="varchar" MaxLength="100" />
+          <Property Name="Monto_pendiente" Type="int" />
+          <Property Name="Estatus" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Banco.dbo.CvTarjetas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="CvTarjetas">
+          <Key>
+            <PropertyRef Name="Numero_Tarjeta" />
+          </Key>
+          <Property Name="Id_usuario" Type="int" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" />
+          <Property Name="Apellido" Type="varchar" MaxLength="100" />
+          <Property Name="Cedula" Type="varchar" MaxLength="15" />
+          <Property Name="Numero_Tarjeta" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Monto_Disponible" Type="varchar" MaxLength="100" />
+          <Property Name="Balance_Consumido" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_Usuario_CAhorro">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Role="Cuenta_ahorro" Type="Self.Cuenta_ahorro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cuenta_ahorro">
+              <PropertyRef Name="Id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_HAhorro">
+          <End Role="Cuenta_ahorro" Type="Self.Cuenta_ahorro" Multiplicity="0..1" />
+          <End Role="Transacciones" Type="Self.Transacciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuenta_ahorro">
+              <PropertyRef Name="Numero_cuenta" />
+            </Principal>
+            <Dependent Role="Transacciones">
+              <PropertyRef Name="Numero_cuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_HCredito">
+          <End Role="Tarjetas_Credito" Type="Self.Tarjetas_Credito" Multiplicity="1" />
+          <End Role="Historial_Credito" Type="Self.Historial_Credito" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Tarjetas_Credito">
+              <PropertyRef Name="Numero_Tarjeta" />
+            </Principal>
+            <Dependent Role="Historial_Credito">
+              <PropertyRef Name="Numero_tarjeta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_HPrestamos">
+          <End Role="Prestamos" Type="Self.Prestamos" Multiplicity="0..1" />
+          <End Role="Historial_Prestamos" Type="Self.Historial_Prestamos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prestamos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Historial_Prestamos">
+              <PropertyRef Name="Id_prestamo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Prestamo">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Role="Prestamos" Type="Self.Prestamos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Prestamos">
+              <PropertyRef Name="Id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_TCredito">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Role="Tarjetas_Credito" Type="Self.Tarjetas_Credito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tarjetas_Credito">
+              <PropertyRef Name="Id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BancoModelStoreContainer">
+          <EntitySet Name="Cuenta_ahorro" EntityType="Self.Cuenta_ahorro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Historial_Credito" EntityType="Self.Historial_Credito" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Historial_Prestamos" EntityType="Self.Historial_Prestamos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prestamos" EntityType="Self.Prestamos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tarjetas_Credito" EntityType="Self.Tarjetas_Credito" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transacciones" EntityType="Self.Transacciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CvClientes" EntityType="Self.CvClientes" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CvClientes].[Id] AS [Id], 
+    [CvClientes].[Nombre] AS [Nombre], 
+    [CvClientes].[Apellido] AS [Apellido], 
+    [CvClientes].[Cedula] AS [Cedula], 
+    [CvClientes].[Correo] AS [Correo], 
+    [CvClientes].[Contraseña] AS [Contraseña], 
+    [CvClientes].[Direccion] AS [Direccion]
+    FROM [dbo].[CvClientes] AS [CvClientes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CvCuentas" EntityType="Self.CvCuentas" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CvCuentas].[Id_usuario] AS [Id_usuario], 
+    [CvCuentas].[Nombre] AS [Nombre], 
+    [CvCuentas].[Apellido] AS [Apellido], 
+    [CvCuentas].[Cedula] AS [Cedula], 
+    [CvCuentas].[Numero_cuenta] AS [Numero_cuenta], 
+    [CvCuentas].[Saldo] AS [Saldo]
+    FROM [dbo].[CvCuentas] AS [CvCuentas]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CvPrestamos" EntityType="Self.CvPrestamos" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CvPrestamos].[Id] AS [Id], 
+    [CvPrestamos].[Id_usuario] AS [Id_usuario], 
+    [CvPrestamos].[Nombre] AS [Nombre], 
+    [CvPrestamos].[Apellido] AS [Apellido], 
+    [CvPrestamos].[Cedula] AS [Cedula], 
+    [CvPrestamos].[Cuotas] AS [Cuotas], 
+    [CvPrestamos].[Monto_pendiente] AS [Monto_pendiente], 
+    [CvPrestamos].[Estatus] AS [Estatus]
+    FROM [dbo].[CvPrestamos] AS [CvPrestamos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CvTarjetas" EntityType="Self.CvTarjetas" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CvTarjetas].[Id_usuario] AS [Id_usuario], 
+    [CvTarjetas].[Nombre] AS [Nombre], 
+    [CvTarjetas].[Apellido] AS [Apellido], 
+    [CvTarjetas].[Cedula] AS [Cedula], 
+    [CvTarjetas].[Numero_Tarjeta] AS [Numero_Tarjeta], 
+    [CvTarjetas].[Monto_Disponible] AS [Monto_Disponible], 
+    [CvTarjetas].[Balance_Consumido] AS [Balance_Consumido]
+    FROM [dbo].[CvTarjetas] AS [CvTarjetas]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Usuario_CAhorro" Association="Self.FK_Usuario_CAhorro">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Cuenta_ahorro" EntitySet="Cuenta_ahorro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_HAhorro" Association="Self.FK_Usuario_HAhorro">
+            <End Role="Cuenta_ahorro" EntitySet="Cuenta_ahorro" />
+            <End Role="Transacciones" EntitySet="Transacciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_HCredito" Association="Self.FK_Usuario_HCredito">
+            <End Role="Tarjetas_Credito" EntitySet="Tarjetas_Credito" />
+            <End Role="Historial_Credito" EntitySet="Historial_Credito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_HPrestamos" Association="Self.FK_Usuario_HPrestamos">
+            <End Role="Prestamos" EntitySet="Prestamos" />
+            <End Role="Historial_Prestamos" EntitySet="Historial_Prestamos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Prestamo" Association="Self.FK_Usuario_Prestamo">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Prestamos" EntitySet="Prestamos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_TCredito" Association="Self.FK_Usuario_TCredito">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Tarjetas_Credito" EntitySet="Tarjetas_Credito" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BancoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cuenta_ahorro">
+          <Key>
+            <PropertyRef Name="Numero_cuenta" />
+          </Key>
+          <Property Name="Id_usuario" Type="Int32" />
+          <Property Name="Numero_cuenta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Saldo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuario_CAhorro" FromRole="Cuenta_ahorro" ToRole="Usuarios" />
+          <NavigationProperty Name="Transacciones" Relationship="Self.FK_Usuario_HAhorro" FromRole="Cuenta_ahorro" ToRole="Transacciones" />
+        </EntityType>
+        <EntityType Name="Historial_Credito">
+          <Key>
+            <PropertyRef Name="Numero_tarjeta" />
+          </Key>
+          <Property Name="Numero_tarjeta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Balance_Cons" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Monto_Disp" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tarjetas_Credito" Relationship="Self.FK_Usuario_HCredito" FromRole="Historial_Credito" ToRole="Tarjetas_Credito" />
+        </EntityType>
+        <EntityType Name="Historial_Prestamos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_prestamo" Type="Int32" />
+          <Property Name="Monto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Concepto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Restante" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Prestamos" Relationship="Self.FK_Usuario_HPrestamos" FromRole="Historial_Prestamos" ToRole="Prestamos" />
+        </EntityType>
+        <EntityType Name="Prestamos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id_usuario" Type="Int32" />
+          <Property Name="Monto_pendiente" Type="Int32" />
+          <Property Name="Cuotas" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Estatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Historial_Prestamos" Relationship="Self.FK_Usuario_HPrestamos" FromRole="Prestamos" ToRole="Historial_Prestamos" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuario_Prestamo" FromRole="Prestamos" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tarjetas_Credito">
+          <Key>
+            <PropertyRef Name="Numero_Tarjeta" />
+          </Key>
+          <Property Name="Id_usuario" Type="Int32" />
+          <Property Name="Numero_Tarjeta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Balance_Consumido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Monto_Disponible" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Limite" Type="Int32" />
+          <NavigationProperty Name="Historial_Credito" Relationship="Self.FK_Usuario_HCredito" FromRole="Tarjetas_Credito" ToRole="Historial_Credito" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuario_TCredito" FromRole="Tarjetas_Credito" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Transacciones">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Numero_cuenta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Monto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Cuenta_ahorro" Relationship="Self.FK_Usuario_HAhorro" FromRole="Transacciones" ToRole="Cuenta_ahorro" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Contraseña" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Cedula" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Rol" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Cuenta_ahorro" Relationship="Self.FK_Usuario_CAhorro" FromRole="Usuarios" ToRole="Cuenta_ahorro" />
+          <NavigationProperty Name="Prestamos" Relationship="Self.FK_Usuario_Prestamo" FromRole="Usuarios" ToRole="Prestamos" />
+          <NavigationProperty Name="Tarjetas_Credito" Relationship="Self.FK_Usuario_TCredito" FromRole="Usuarios" ToRole="Tarjetas_Credito" />
+        </EntityType>
+        <EntityType Name="CvClientes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Cedula" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Contraseña" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CvCuentas">
+          <Key>
+            <PropertyRef Name="Numero_cuenta" />
+          </Key>
+          <Property Name="Id_usuario" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Cedula" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Numero_cuenta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Saldo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CvPrestamos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id_usuario" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Cedula" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Cuotas" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Monto_pendiente" Type="Int32" />
+          <Property Name="Estatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CvTarjetas">
+          <Key>
+            <PropertyRef Name="Numero_Tarjeta" />
+          </Key>
+          <Property Name="Id_usuario" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Cedula" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Numero_Tarjeta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Monto_Disponible" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Balance_Consumido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Usuario_CAhorro">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Role="Cuenta_ahorro" Type="Self.Cuenta_ahorro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cuenta_ahorro">
+              <PropertyRef Name="Id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_HAhorro">
+          <End Role="Cuenta_ahorro" Type="Self.Cuenta_ahorro" Multiplicity="0..1" />
+          <End Role="Transacciones" Type="Self.Transacciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuenta_ahorro">
+              <PropertyRef Name="Numero_cuenta" />
+            </Principal>
+            <Dependent Role="Transacciones">
+              <PropertyRef Name="Numero_cuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_HCredito">
+          <End Role="Tarjetas_Credito" Type="Self.Tarjetas_Credito" Multiplicity="1" />
+          <End Role="Historial_Credito" Type="Self.Historial_Credito" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Tarjetas_Credito">
+              <PropertyRef Name="Numero_Tarjeta" />
+            </Principal>
+            <Dependent Role="Historial_Credito">
+              <PropertyRef Name="Numero_tarjeta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_HPrestamos">
+          <End Role="Prestamos" Type="Self.Prestamos" Multiplicity="0..1" />
+          <End Role="Historial_Prestamos" Type="Self.Historial_Prestamos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prestamos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Historial_Prestamos">
+              <PropertyRef Name="Id_prestamo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Prestamo">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Role="Prestamos" Type="Self.Prestamos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Prestamos">
+              <PropertyRef Name="Id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_TCredito">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Role="Tarjetas_Credito" Type="Self.Tarjetas_Credito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tarjetas_Credito">
+              <PropertyRef Name="Id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BancoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cuenta_ahorro" EntityType="Self.Cuenta_ahorro" />
+          <EntitySet Name="Historial_Credito" EntityType="Self.Historial_Credito" />
+          <EntitySet Name="Historial_Prestamos" EntityType="Self.Historial_Prestamos" />
+          <EntitySet Name="Prestamos" EntityType="Self.Prestamos" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Tarjetas_Credito" EntityType="Self.Tarjetas_Credito" />
+          <EntitySet Name="Transacciones" EntityType="Self.Transacciones" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <EntitySet Name="CvClientes" EntityType="Self.CvClientes" />
+          <EntitySet Name="CvCuentas" EntityType="Self.CvCuentas" />
+          <EntitySet Name="CvPrestamos" EntityType="Self.CvPrestamos" />
+          <EntitySet Name="CvTarjetas" EntityType="Self.CvTarjetas" />
+          <AssociationSet Name="FK_Usuario_CAhorro" Association="Self.FK_Usuario_CAhorro">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Cuenta_ahorro" EntitySet="Cuenta_ahorro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_HAhorro" Association="Self.FK_Usuario_HAhorro">
+            <End Role="Cuenta_ahorro" EntitySet="Cuenta_ahorro" />
+            <End Role="Transacciones" EntitySet="Transacciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_HCredito" Association="Self.FK_Usuario_HCredito">
+            <End Role="Tarjetas_Credito" EntitySet="Tarjetas_Credito" />
+            <End Role="Historial_Credito" EntitySet="Historial_Credito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_HPrestamos" Association="Self.FK_Usuario_HPrestamos">
+            <End Role="Prestamos" EntitySet="Prestamos" />
+            <End Role="Historial_Prestamos" EntitySet="Historial_Prestamos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Prestamo" Association="Self.FK_Usuario_Prestamo">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Prestamos" EntitySet="Prestamos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_TCredito" Association="Self.FK_Usuario_TCredito">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Tarjetas_Credito" EntitySet="Tarjetas_Credito" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BancoModelStoreContainer" CdmEntityContainer="BancoEntities">
+          <EntitySetMapping Name="Cuenta_ahorro">
+            <EntityTypeMapping TypeName="BancoModel.Cuenta_ahorro">
+              <MappingFragment StoreEntitySet="Cuenta_ahorro">
+                <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+                <ScalarProperty Name="Numero_cuenta" ColumnName="Numero_cuenta" />
+                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Historial_Credito">
+            <EntityTypeMapping TypeName="BancoModel.Historial_Credito">
+              <MappingFragment StoreEntitySet="Historial_Credito">
+                <ScalarProperty Name="Numero_tarjeta" ColumnName="Numero_tarjeta" />
+                <ScalarProperty Name="Balance_Cons" ColumnName="Balance_Cons" />
+                <ScalarProperty Name="Monto_Disp" ColumnName="Monto_Disp" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Historial_Prestamos">
+            <EntityTypeMapping TypeName="BancoModel.Historial_Prestamos">
+              <MappingFragment StoreEntitySet="Historial_Prestamos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_prestamo" ColumnName="Id_prestamo" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+                <ScalarProperty Name="Restante" ColumnName="Restante" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prestamos">
+            <EntityTypeMapping TypeName="BancoModel.Prestamos">
+              <MappingFragment StoreEntitySet="Prestamos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+                <ScalarProperty Name="Monto_pendiente" ColumnName="Monto_pendiente" />
+                <ScalarProperty Name="Cuotas" ColumnName="Cuotas" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BancoModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tarjetas_Credito">
+            <EntityTypeMapping TypeName="BancoModel.Tarjetas_Credito">
+              <MappingFragment StoreEntitySet="Tarjetas_Credito">
+                <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+                <ScalarProperty Name="Numero_Tarjeta" ColumnName="Numero_Tarjeta" />
+                <ScalarProperty Name="Balance_Consumido" ColumnName="Balance_Consumido" />
+                <ScalarProperty Name="Monto_Disponible" ColumnName="Monto_Disponible" />
+                <ScalarProperty Name="Limite" ColumnName="Limite" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transacciones">
+            <EntityTypeMapping TypeName="BancoModel.Transacciones">
+              <MappingFragment StoreEntitySet="Transacciones">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Numero_cuenta" ColumnName="Numero_cuenta" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="BancoModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CvClientes">
+            <EntityTypeMapping TypeName="BancoModel.CvClientes">
+              <MappingFragment StoreEntitySet="CvClientes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CvCuentas">
+            <EntityTypeMapping TypeName="BancoModel.CvCuentas">
+              <MappingFragment StoreEntitySet="CvCuentas">
+                <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Numero_cuenta" ColumnName="Numero_cuenta" />
+                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CvPrestamos">
+            <EntityTypeMapping TypeName="BancoModel.CvPrestamos">
+              <MappingFragment StoreEntitySet="CvPrestamos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Cuotas" ColumnName="Cuotas" />
+                <ScalarProperty Name="Monto_pendiente" ColumnName="Monto_pendiente" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CvTarjetas">
+            <EntityTypeMapping TypeName="BancoModel.CvTarjetas">
+              <MappingFragment StoreEntitySet="CvTarjetas">
+                <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Numero_Tarjeta" ColumnName="Numero_Tarjeta" />
+                <ScalarProperty Name="Monto_Disponible" ColumnName="Monto_Disponible" />
+                <ScalarProperty Name="Balance_Consumido" ColumnName="Balance_Consumido" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

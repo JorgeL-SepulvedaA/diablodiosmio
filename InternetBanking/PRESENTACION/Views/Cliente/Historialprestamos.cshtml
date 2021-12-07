@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ENTIDADES.Historial_Prestamos>
+
+@{
+    ViewBag.Title = "Historialprestamos";
+}
+
+<h2>Historial del prestamo</h2>
+
+<p>
+    @Html.ActionLink("Atras", "Prestamo")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Monto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Concepto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Restante)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Monto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Concepto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Restante)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+    </tr>
+}
+
+</table>
