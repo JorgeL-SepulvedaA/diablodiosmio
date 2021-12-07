@@ -305,6 +305,7 @@ namespace PRESENTACION.Controllers
 
 
                                 negocio.pagartarjeta(id, Convert.ToString(md), Convert.ToString(mc), cuenta, monto, Convert.ToString(saldo));
+                                negocio.ahistorialtarjeta(tarjetas.Numero_Tarjeta, monto, Convert.ToString(mc), Convert.ToString(md));
 
                             }
                         }

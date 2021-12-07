@@ -219,5 +219,37 @@ namespace DATOS
 
         }
 
+        public void ahistorialtarjeta(string numerotar, string monto, string restante, string montod)
+        {
+            Historial_Credito credito = new Historial_Credito();
+
+            if(restante == "0")
+            {
+                credito.Numero_Tarjeta = numerotar;
+                credito.Monto = monto;
+                credito.Monto_disponible = montod;
+                credito.Restante = restante;
+                credito.Concepto = "Pago completo";
+                DateTime dateTime = DateTime.Now;
+                credito.Fecha = dateTime;
+                bd.Historial_Credito.Add(credito);
+                bd.SaveChanges();
+            }
+            else
+            {
+                credito.Numero_Tarjeta = numerotar;
+                credito.Monto = monto;
+                credito.Monto_disponible = montod;
+                credito.Restante = restante;
+                credito.Concepto = "Abono";
+                DateTime dateTime = DateTime.Now;
+                credito.Fecha = dateTime;
+                bd.Historial_Credito.Add(credito);
+                bd.SaveChanges();
+            }
+            
+
+        }
+
     }
 }

@@ -80,5 +80,9 @@ namespace NEGOCIOS
             return Clientedatos.Historialprestamo(Id);
 
         }
+        public void ahistorialtarjeta(string numerotar, string monto, string restante, string montod)
+        {
+            Clientedatos.ahistorialtarjeta(numerotar, monto, restante, montod);
+        }
     }
 }
