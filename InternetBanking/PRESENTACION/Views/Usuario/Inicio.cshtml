@@ -3,26 +3,29 @@
     ViewBag.Title = "Inicio";
 }
 
-<div >
-    <h1 align="center">Internet Banking Personal</h1>
+<fieldset>
+    <legend align="center">→ Internet Banking Personal ←</legend>
 
-    <div class="container">
-        <form align="center" action="/Usuario/Login" method="post">
-            <div style="" class="form-group">
-                <label>Ingresa tu email:</label>
-                <br />
-                <input align="center" type="text" name="email" value="" />
+    <div class="container" align="center">
+        <form align="center" action="/Usuario/Login" method="post" id="log">
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                    <span class="input-group-text text-success" id="inputGroup-sizing-lg">Ingresa tu email:</span>
+                </div>
+                <input type="text" class="form-control" name="email" aria-label="Large" aria-describedby="inputGroup-sizing-lg">
             </div>
-            <div class="form-group">
-                <label align="center">Ingresa tu contraseña:</label>
-                <br />
-                <input align="center" type="password" name="contraseña" value="" />
+            <br />
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                    <span class="input-group-text text-success" id="inputGroup-sizing-lg">Ingresa tu contraseña:</span>
+                </div>
+                <input class="form-control" type="password" aria-label="Large" name="contraseña" aria-describedby="inputGroup-sizing-lg">
             </div>
             <div>
                 <div class="form-group">
-                    <button class="btn btn-outline-success">Iniciar sesion</button>
+                    <button class="btn btn-outline-success" id="sizeShape">Iniciar sesion</button>
                 </div>
             </div>
         </form>
     </div>
-</div>
+</fieldset>

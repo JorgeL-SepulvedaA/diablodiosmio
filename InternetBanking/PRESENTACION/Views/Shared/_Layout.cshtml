@@ -5,32 +5,115 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    <title>@ViewBag.Title - TuBanco</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <style>
+        #coolBar {
+            background-color: black;
+        }
+        #headerBar {
+            text-decoration: dashed;
+            @*border: solid 3.5px rgb(0, 92, 128);*@
+            border-radius: 10px;
+            margin-bottom: 10px;
+            margin: 0 auto;
+            padding: 5px;
+            align-content: center;
+            width: 80%;
+        }
+        #sizeShape {
+            font: oblique;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            margin: 0 auto;
+            padding: 5px;
+            align-content: center;
+        }
+        #btn {
+            font: oblique;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            margin: 0 auto;
+            padding: 5px;
+            align-content: center;
+            background-color: whitesmoke;
+        }
+        #content {
+            background-color: white;
+            align-content: center;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            margin: 0 auto;
+            padding: 5px;
+            align-content: center;
+        }
+        #footer {
+            font-size: small;
+            font-style: italic;
+        }
+        #log{
+            align-content: center;
+        }
+        fieldset {
+            border-radius: 10px;
+            margin-bottom: 10px;
+            background-color: lightgrey;
+            border-color: antiquewhite;
+            border: 3px;
+        }
+        legend {
+            font: 1000;
+            border-radius: 10px;
+            background-color: lightgrey;
+            border-color: antiquewhite;
+            border: 3px;
+            width: 50%;
+            text-align:center;
+            font-size: 32px;
+        }
+        span {
+            font-style: italic;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+        body {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            background-color: white;
+            background-attachment: fixed;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position-y: top;
+            background-position-x: left;
+            background-image: url("https://media.istockphoto.com/vectors/modern-abstract-background-with-different-shapes-of-neutral-colors-vector-id1283676563?b=1&k=6&m=1283676563&s=170667a&w=0&h=E3Rl2ouof2eK7P6pQoIanhgcA9bRwoerW3dwBLEbGbU=");
+        }
+    </style>
 </head>
+    
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+    <div class="navbar navbar-inverse navbar-fixed-top" id="coolBar">
+        <div class="containers " id="headerBar">
             @Html.ActionLink("Internet Banking personal", "Index", "Inicio", new { area = "" }, new { @class = "navbar-brand" })
-                <div class="navbar-header ">
+                <div class="navbar-header" id="sizeShape">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <button type="button" class="btn btn-outline-danger text-right">@Html.ActionLink("Salir", "Inicio", "Usuario")</button>
+                    
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                     </ul>
                 </div>
             </div>
+            <button id="sizeShape" class="btn btn-outline-danger">@Html.ActionLink("Salir", "Inicio", "Usuario",  new { area = "" }, new { @class = "text-white text-right" })</button>
     </div>
-    <div class="container body-content">
+    <div class="container body-content" id="content">
+        <hr />
         @RenderBody()
         <hr />
-        <footer>
+        <footer class="text-secondary" id="footer">
             <p>&copy; @DateTime.Now.Year - TuBanco</p>
         </footer>
     </div>

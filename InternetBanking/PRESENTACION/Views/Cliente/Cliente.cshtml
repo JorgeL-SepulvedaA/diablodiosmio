@@ -5,12 +5,21 @@
 
 <h2>Cuenta de ahorro</h2>
 <br />
-<h3>Numero de cuenta: #@ViewBag.numero</h3>
+<div class="input-group input-group-lg">
+    <div class="input-group-prepend">
+        <span class="input-group-text text-dark" id="inputGroup-sizing-lg">Numero de cuenta:</span>
+    </div>
+    <input type="text" class="form-control" name="email" aria-label="Large" aria-describedby="inputGroup-sizing-lg" placeholder="No. @ViewBag.numero" readonly>
+</div>
 <br />
-<h3>Saldo: $@ViewBag.saldo</h3>
-
-<a class="btn btn-primary" href="/Cliente/Historial">Historial</a>
-<a class="btn btn-primary" href="/Cliente/TransferenciaCuenta">Transferir</a>
-<a class="btn btn-primary" href="/Cliente/Depostio">Depositar</a>
-<a class="btn btn-primary" href="/Cliente/Inicio">Atras</a>
-
+<div class="input-group input-group-lg">
+    <div class="input-group-prepend">
+        <span class="input-group-text text-dark" id="inputGroup-sizing-lg">Saldo:</span>
+    </div>
+    <input type="text" class="form-control" name="email" aria-label="Large" aria-describedby="inputGroup-sizing-lg" placeholder="$ @ViewBag.saldo DOP" readonly>
+</div>
+<br />
+<button type="button" class="btn btn-outline-success" href="/Cliente/Historial">Historial</button><br />
+<button type="button" class="btn btn-outline-warning" href="/Cliente/TransferenciaCuenta">Transferir</button><br />
+<button type="button" class="btn btn-outline-primary" href="/Cliente/Depostio">Depositar</button><br />
+<button type="button" class="btn btn-outline-danger" href="/Cliente/Inicio">Atras</button>
