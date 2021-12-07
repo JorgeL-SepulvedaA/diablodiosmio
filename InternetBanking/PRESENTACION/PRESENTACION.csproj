@@ -202,6 +202,7 @@
     <Content Include="Views\Cliente\Depostio.cshtml" />
     <Content Include="Views\Cliente\ConsumoTarjeta.cshtml" />
     <Content Include="Views\Cliente\AvanceEfectivo.cshtml" />
+    <Content Include="Views\Cliente\PagarTarjeta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

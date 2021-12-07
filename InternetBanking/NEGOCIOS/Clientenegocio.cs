@@ -53,21 +53,16 @@ namespace NEGOCIOS
 
         public void pagoprestamos(int id, string monto, string restante)
         {
-
             Clientedatos.pagoprestamos(id, monto, restante);
         }
-
         public List<Transacciones> Historialahorro(int Id)
         {
             return Clientedatos.Historialahorro(Id);
         }
-
         public void Depositoprestamo(int id, string depo)
         {
             Clientedatos.Depositoprestamo(id, depo);
-
         }
-
         public void consumotarjeta(int n, string md, string mc)
         {
             Clientedatos.consumotarjeta(n, md, mc);
