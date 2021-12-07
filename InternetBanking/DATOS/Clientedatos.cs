@@ -10,11 +10,7 @@ namespace DATOS
     public class Clientedatos
     {
         BancoEntities bd = new BancoEntities();
-        //public void Cuenta(int id)
-        //{
-        //    bd.CvCuentas.Find(id);
 
-        //}
 
         public List<Cuenta_ahorro> Cuenta()
         {
