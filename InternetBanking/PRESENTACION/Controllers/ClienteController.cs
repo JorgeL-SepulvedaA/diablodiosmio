@@ -34,7 +34,7 @@ namespace PRESENTACION.Controllers
 
             return View();
 
-            
+
         }
 
         public ActionResult Prestamo()
@@ -96,6 +96,11 @@ namespace PRESENTACION.Controllers
         }
 
         public ActionResult AvanceEfectivo()
+        {
+            return View();
+        }
+
+        public ActionResult PagarTarjeta()
         {
             return View();
         }
@@ -184,7 +189,7 @@ namespace PRESENTACION.Controllers
 
                     }
                 }
-            }     
+            }
 
             return View();
         }
@@ -196,7 +201,7 @@ namespace PRESENTACION.Controllers
             int id = Convert.ToInt32(Session["Id"]);
             var datos = negocio.Cuenta();
 
-            foreach(Cuenta_ahorro cuenta in datos)
+            foreach (Cuenta_ahorro cuenta in datos)
             {
                 if (cuenta.Id_usuario == id)
                 {
@@ -217,7 +222,7 @@ namespace PRESENTACION.Controllers
 
             var datos = negocio.Tarjetas();
 
-            foreach(Tarjetas_Credito tarjetas in datos)
+            foreach (Tarjetas_Credito tarjetas in datos)
             {
                 if (tarjetas.Id_usuario == id)
                 {
@@ -251,7 +256,7 @@ namespace PRESENTACION.Controllers
                 {
                     if (Convert.ToInt32(deposito) <= Convert.ToInt32(tarjetas.Monto_Disponible))
                     {
-                        foreach(Cuenta_ahorro ahorro in datos2)
+                        foreach (Cuenta_ahorro ahorro in datos2)
                         {
                             if (ahorro.Numero_cuenta == cuenta)
                             {
@@ -263,20 +268,46 @@ namespace PRESENTACION.Controllers
                                 negocio.transferiracuenta(id, Convert.ToString(md), deposito, cuenta, deposito, Convert.ToString(saldo));
 
                             }
-                            
-                            
-                            
-                            
-                            
-                            //negocio.consumotarjeta(id, Convert.ToString(md), Convert.ToString(deposito));
-
                         }
-                        
+                    }
+                }
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+
+        public ActionResult PagarTarjeta(int id, string cuenta, string monto)
+        {
+            id = Convert.ToInt32(Session["Id"]);
+            cuenta = Request.Form["cuenta"];
+            monto = Request.Form["saldo"];
+
+            var datos1 = negocio.Tarjetas();
+            var datos2 = negocio.Cuenta();
+
+            foreach (Tarjetas_Credito tarjetas in datos1)
+            {
+                if (tarjetas.Id_usuario == id)
+                {
+                    if (Convert.ToInt32(monto) <= Convert.ToInt32(tarjetas.Limite))
+                    {
+                        foreach (Cuenta_ahorro ahorro in datos2)
+                        {
+                            if (ahorro.Numero_cuenta == cuenta)
+                            {
+                                int md = Convert.ToInt32(tarjetas.Monto_Disponible) + Convert.ToInt32(monto);
+
+                                int saldo = Convert.ToInt32(ahorro.Saldo) - Convert.ToInt32(monto);
+
+                                int mc = Convert.ToInt32(tarjetas.Balance_Consumido) - Convert.ToInt32(monto);
 
 
+                                negocio.pagartarjeta(id, Convert.ToString(md), Convert.ToString(mc), cuenta, monto, Convert.ToString(saldo));
 
-
-                        
+                            }
+                        }
                     }
                 }
             }
