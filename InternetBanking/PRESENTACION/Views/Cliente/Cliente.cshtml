@@ -3,25 +3,26 @@
     ViewBag.Title = "Cliente";
 }
 
-<h2>Cuenta de ahorro</h2>
-<br />
-<div class="input-group input-group-lg">
-    <div class="input-group-prepend">
-        <span class="input-group-text text-dark" id="inputGroup-sizing-lg">Numero de cuenta:</span>
+<fieldset>
+    <legend align="center">→ Cuenta de ahorro ←</legend>
+    <div class="input-group input-group-lg">
+        <div class="input-group-prepend">
+            <span class="input-group-text text-dark" id="inputGroup-sizing-lg">Numero de cuenta:</span>
+        </div>
+        <input type="text" class="form-control bg-light text-dark" aria-label="Large" aria-describedby="inputGroup-sizing-lg" placeholder="No. @ViewBag.numero" readonly>
     </div>
-    <input type="text" class="form-control" name="email" aria-label="Large" aria-describedby="inputGroup-sizing-lg" placeholder="No. @ViewBag.numero" readonly>
-</div>
-<br />
-<div class="input-group input-group-lg">
-    <div class="input-group-prepend">
-        <span class="input-group-text text-dark" id="inputGroup-sizing-lg">Saldo:</span>
+    <br />
+    <div class="input-group input-group-lg">
+        <div class="input-group-prepend">
+            <span class="input-group-text text-dark" id="inputGroup-sizing-lg">Saldo:</span>
+        </div>
+        <input type="text" class="form-control bg-light text-dark" aria-label="Large" aria-describedby="inputGroup-sizing-lg" placeholder="$ @ViewBag.saldo DOP" readonly>
     </div>
-    <input type="text" class="form-control" name="email" aria-label="Large" aria-describedby="inputGroup-sizing-lg" placeholder="$ @ViewBag.saldo DOP" readonly>
-</div>
-<br />
-<div class="form-group">
-    <button type="button" class="btn btn-outline-success text-dark" href="/Cliente/Historial">Historial</button><br />
-    <button type="button" class="btn btn-outline-warning text-dark" href="/Cliente/TransferenciaCuenta">Transferir</button><br />
-    <button type="button" class="btn btn-outline-primary text-dark" href="/Cliente/Depostio">Depositar</button><br />
-    <button type="button" class="btn btn-outline-danger text-dark" href="/Cliente/Inicio">Atras</button>
-</div>
+    <br />
+    <div class="form-group" align="center">
+        <a type="button" class="btn btn-outline-success bg-light text-dark" href="/Cliente/Historial">Historial</a>    
+        <a type="button" class="btn btn-outline-warning bg-light text-dark" href="/Cliente/TransferenciaCuenta">Transferir</a>  
+        <a type="button" class="btn btn-outline-primary bg-light text-dark" href="/Cliente/Depostio">Depositar</a>  
+        <a type="button" class="btn btn-outline-danger bg-light text-dark" href="/Cliente/Inicio">Atras</a>
+    </div>
+</fieldset>

@@ -2,15 +2,41 @@
 @{
     ViewBag.Title = "Tarjeta";
 }
-
-<h2>Tarjeta</h2>
-
-<h3>Numero de la tarjeta: #@ViewBag.numero</h3>
-<h3>Limite: $@ViewBag.limite</h3>
-<h3>Monto disponible: $@ViewBag.monto</h3>
-<h3>Monto consumido: $@ViewBag.consumido</h3>
-
-<a class="btn btn-primary" href="/Cliente/Inicio">INICIO</a>
-<a class="btn btn-primary" href="/Cliente/ConsumoTarjeta">Consumir</a>
-<a class="btn btn-primary" href="/Cliente/AvanceEfectivo">Transferir</a>
-<a class="btn btn-primary" href="/Cliente/AvanceEfectivo">PagarTarjeta</a>
+<fieldset>
+    <legend align="center">→ Tarjeta ←</legend>
+    <div class="input-group input-group-lg">
+        <div class="input-group-prepend">
+            <span class="input-group-text text-dark" id="inputGroup-sizing-lg">Numero de la tarjeta:</span>
+        </div>
+        <input type="text" class="form-control bg-light text-dark" aria-label="Large" aria-describedby="inputGroup-sizing-lg" placeholder="No. @ViewBag.numero" readonly>
+    </div>
+    <br />
+    <div class="input-group input-group-lg">
+        <div class="input-group-prepend">
+            <span class="input-group-text text-dark" id="inputGroup-sizing-lg">Limite:</span>
+        </div>
+        <input type="text" class="form-control bg-light text-dark" aria-label="Large" aria-describedby="inputGroup-sizing-lg" placeholder="$ @ViewBag.limite DOP" readonly>
+    </div>
+    <br />
+    <div class="input-group input-group-lg">
+        <div class="input-group-prepend">
+            <span class="input-group-text text-dark" id="inputGroup-sizing-lg">Monto disponible:</span>
+        </div>
+        <input type="text" class="form-control bg-light text-dark" aria-label="Large" aria-describedby="inputGroup-sizing-lg" placeholder="$ @ViewBag.monto DOP" readonly>
+    </div>
+    <br />
+    <div class="input-group input-group-lg">
+        <div class="input-group-prepend">
+            <span class="input-group-text text-dark" id="inputGroup-sizing-lg">Monto consumido:</span>
+        </div>
+        <input type="text" class="form-control bg-light text-dark" aria-label="Large" aria-describedby="inputGroup-sizing-lg" placeholder="$ @ViewBag.consumido DOP" readonly>
+    </div>
+    <br />
+    <div class="form-group" align="center">
+        <a type="button" class="btn btn-outline-success bg-light text-dark" href="/Cliente/ConsumoTarjeta">Consumir</a>
+        <a type="button" class="btn btn-outline-warning bg-light text-dark" href="/Cliente/Avanceefectivo">Avance efectivo</a>
+        <a type="button" class="btn btn-outline-primary bg-light text-dark" href="/Cliente/PagarTarjeta">Pago</a>
+        <a type="button" class="btn btn-outline-secondary bg-light text-dark" href="/Cliente/Historialtarjeta">Historial</a>
+        <a type="button" class="btn btn-outline-danger bg-light text-dark" href="/Cliente/Inicio">Atras</a>
+    </div>
+</fieldset>

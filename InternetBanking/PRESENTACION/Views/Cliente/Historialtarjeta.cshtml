@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ENTIDADES.Historial_Credito>
+
+@{
+    ViewBag.Title = "Historialtarjeta";
+}
+
+<h2>Historialtarjeta</h2>
+
+<a class="btn btn-outline-danger bg-light text-dark" id="sizeShape" href="/Cliente/Tarjeta">Atras</a>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Numero_Tarjeta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Monto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Concepto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Restante)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Monto_disponible)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Numero_Tarjeta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Monto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Concepto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Restante)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Monto_disponible)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -152,6 +152,22 @@ namespace DATOS
 
         }
 
+        public List<Historial_Credito> Historialcredito(int Id)
+        {
+            Tarjetas_Credito tarjetas = bd.Tarjetas_Credito.Where(d => d.Id_usuario == Id).First();
+
+            var cuenta = tarjetas.Numero_Tarjeta ;
+
+            var query =
+                from emp in bd.Historial_Credito
+                where emp.Numero_Tarjeta == cuenta
+                select emp;
+            List<Historial_Credito> lista2 = query.ToList();
+
+            return lista2;
+
+        }
+
 
         public void consumotarjeta(int n, string md, string mc)
         {
@@ -235,7 +251,7 @@ namespace DATOS
                 bd.Historial_Credito.Add(credito);
                 bd.SaveChanges();
             }
-            else
+            else if (restante != "0")
             {
                 credito.Numero_Tarjeta = numerotar;
                 credito.Monto = monto;

@@ -6,9 +6,8 @@
 
 <h2>VistaPrestamos</h2>
 
-<p>
-    @Html.ActionLink("Crear", "Prestamo")
-</p>
+<a class="btn btn-outline-warning bg-light text-dark" id="sizeShape" href="/Administrador/Prestamo">Nuevo</a>
+<a class="btn btn-outline-danger bg-light text-dark" id="sizeShape" href="/Administrador/Inicio">Atras</a>
 <table class="table">
     <tr>
         <th>
@@ -35,36 +34,31 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Id_usuario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Apellido)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cedula)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cuotas)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Monto_pendiente)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Estatus)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) 
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id_usuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cedula)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cuotas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Monto_pendiente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estatus)
+            </td>
+        </tr>
+    }
 
 </table>
-<p>
-    @Html.ActionLink("Atras", "Inicio")
-</p>

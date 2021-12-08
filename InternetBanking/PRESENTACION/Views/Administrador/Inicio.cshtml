@@ -2,11 +2,13 @@
 @{
     ViewBag.Title = "Inicio";
 }
-
-<h2>Administrador</h2>
-
-<a class="btn btn-primary" href="/Administrador/VistaClientes">Clientes</a>
-<a class="btn btn-primary" href="/Administrador/VistaAhorro">Cuentas de ahorro</a>
-<a class="btn btn-primary" href="/Administrador/VistaPrestamos">Prestamos</a>
-<a class="btn btn-primary" href="/Administrador/VistaTarjetas">Tarjetas de credito</a>
-<a class="btn btn-primary" href="/Administrador/Registro">Usuarios</a>  
+<fieldset>
+    <legend align="center">→ Administrador ←</legend>
+    <div class="container" align="center">
+        <a type="button" class="btn btn-outline-success bg-light text-dark" href="/Administrador/VistaClientes">Clientes</a>
+        <a type="button" class="btn btn-outline-warning bg-light text-dark" href="/Administrador/VistaAhorro">Cuentas de ahorro</a>
+        <a type="button" class="btn btn-outline-danger bg-light text-dark" href="/Administrador/VistaPrestamos">Prestamos</a>
+        <a type="button" class="btn btn-outline-primary bg-light text-dark" href="/Administrador/VistaTarjetas">Tarjetas de credito</a>
+        <a type="button" class="btn btn-outline-secondary bg-light text-dark" href="/Administrador/Registro">Usuarios</a>
+    </div><br />
+</fieldset>

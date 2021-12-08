@@ -1,17 +1,33 @@
 ﻿
 @{
-    ViewBag.Title = "TransferenciaCuenta";
+    ViewBag.Title = "Transferencias";
 }
 
-<h2>Transferencia</h2>
+<fieldset>
+    <legend align="center">→ Transferencia ←</legend>
 
-<form action="TransferenciaCuenta" method="post" enctype="multipart/form-data">
-    <p>Cuenta: <input type="text" name="cuenta" size="40"></p>
-    <p>Monto <input type="text" name="saldo"></p>
-    <p>
-        <input type="submit" value="Enviar">
-        <input type="reset" value="Borrar">
-        <a class="btn btn-primary" href="/Cliente/Inicio">INICIO</a>
-    </p>
-</form>
-
+    <div class="container" align="center">
+        <form align="center" action="TransferenciaCuenta" method="post" id="log" enctype="multipart/form-data">
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                    <span class="input-group-text text-dark" id="inputGroup-sizing-lg">Cuenta:</span>
+                </div>
+                <input type="text" class="form-control text-dark" name="cuenta" aria-label="Large" aria-describedby="inputGroup-sizing-lg">
+            </div>
+            <br />
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                    <span class="input-group-text text-dark" id="inputGroup-sizing-lg">Monto:</span>
+                </div>
+                <input class="form-control text-dark" type="text" aria-label="Large" name="saldo" aria-describedby="inputGroup-sizing-lg">
+            </div>
+            <div>
+                <div class="form-group">
+                    <button class="btn btn-outline-success bg-light text-dark" id="sizeShape" type="submit" value="Enviar">Enviar</button>  
+                    <button class="btn btn-outline-warning bg-light text-dark" id="sizeShape" type="reset" value="Borrar">Borrar</button>   
+                    <a class="btn btn-outline-danger bg-light text-dark" id="sizeShape" href="/Cliente/Cliente">Atras</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</fieldset>

@@ -6,9 +6,8 @@
 
 <h2>Historial</h2>
 
-<p>
-    @Html.ActionLink("Atras", "Cliente")
-</p>
+<a class="btn btn-outline-danger bg-light text-dark" id="sizeShape" href="/Cliente/Cliente">Atras</a>
+
 <table class="table">
     <tr>
         <th>
@@ -26,21 +25,22 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Numero_cuenta)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tipo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Monto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fecha)
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Numero_cuenta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Monto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+        </tr>
+    }
 
 </table>

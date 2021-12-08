@@ -2,14 +2,24 @@
 @{
     ViewBag.Title = "ConsumoTarjeta";
 }
+<fieldset>
+    <legend align="center">→ Consumo ←</legend>
 
-<h2>ConsumoTarjeta</h2>
-
-<form action="ConsumoTarjeta" method="post" enctype="multipart/form-data">
-    <p>Monto consumido <input type="text" name="consumo"></p>
-    <p>
-        <input type="submit" value="Enviar">
-        <input type="reset" value="Borrar">
-        <a class="btn btn-primary" href="/Cliente/Tarjeta">Atras</a>
-    </p>
-</form>
+    <div class="container" align="center">
+        <form align="center" action="ConsumoTarjeta" method="post" id="log" enctype="multipart/form-data">
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                    <span class="input-group-text text-dark" id="inputGroup-sizing-lg">Monto:</span>
+                </div>
+                <input class="form-control text-dark" type="text" aria-label="Large" name="consumo" aria-describedby="inputGroup-sizing-lg">
+            </div>
+            <div>
+                <div class="form-group">
+                    <button class="btn btn-outline-success bg-light text-dark" id="sizeShape" type="submit" value="Enviar">Enviar</button>
+                    <button class="btn btn-outline-warning bg-light text-dark" id="sizeShape" type="reset" value="Borrar">Borrar</button>
+                    <a class="btn btn-outline-danger bg-light text-dark" id="sizeShape" href="/Cliente/Tarjeta">Atras</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</fieldset>

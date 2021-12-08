@@ -120,6 +120,13 @@ namespace PRESENTACION.Controllers
             return View(datos);
         }
 
+        public ActionResult Historialtarjeta()
+        {
+            int id = Convert.ToInt32(Session["Id"]);
+            var datos = negocio.Historialcredito(id);
+            return View(datos);
+        }
+
         [HttpPost]
 
         public ActionResult TransferenciaCuenta(int saldo)
@@ -278,11 +285,11 @@ namespace PRESENTACION.Controllers
 
         [HttpPost]
 
-        public ActionResult PagarTarjeta(int id, string cuenta, string monto)
+        public ActionResult PagarTarjeta(string cuenta, string monto)
         {
-            id = Convert.ToInt32(Session["Id"]);
+            int id = Convert.ToInt32(Session["Id"]);
             cuenta = Request.Form["cuenta"];
-            monto = Request.Form["saldo"];
+            monto = Request.Form["monto"];
 
             var datos1 = negocio.Tarjetas();
             var datos2 = negocio.Cuenta();
@@ -297,23 +304,38 @@ namespace PRESENTACION.Controllers
                         {
                             if (ahorro.Numero_cuenta == cuenta)
                             {
-                                int md = Convert.ToInt32(tarjetas.Monto_Disponible) + Convert.ToInt32(monto);
+                                if (Convert.ToInt32(tarjetas.Balance_Consumido) <= 0)
+                                {
+                                    int md = Convert.ToInt32(tarjetas.Monto_Disponible) + Convert.ToInt32(monto);
 
-                                int saldo = Convert.ToInt32(ahorro.Saldo) - Convert.ToInt32(monto);
+                                    int saldo = Convert.ToInt32(ahorro.Saldo) - Convert.ToInt32(monto);
 
-                                int mc = Convert.ToInt32(tarjetas.Balance_Consumido) - Convert.ToInt32(monto);
+                                    int mc = 0;
 
 
-                                negocio.pagartarjeta(id, Convert.ToString(md), Convert.ToString(mc), cuenta, monto, Convert.ToString(saldo));
-                                negocio.ahistorialtarjeta(tarjetas.Numero_Tarjeta, monto, Convert.ToString(mc), Convert.ToString(md));
+                                    negocio.pagartarjeta(id, Convert.ToString(md), Convert.ToString(mc), cuenta, monto, Convert.ToString(saldo));
+                                    negocio.ahistorialtarjeta(tarjetas.Numero_Tarjeta, monto, Convert.ToString(mc), Convert.ToString(md));
+
+                                }
+                                else
+                                {
+                                    int md2 = Convert.ToInt32(tarjetas.Monto_Disponible) + Convert.ToInt32(monto);
+
+                                    int saldo2 = Convert.ToInt32(ahorro.Saldo) - Convert.ToInt32(monto);
+
+                                    int mc2 = Convert.ToInt32(tarjetas.Balance_Consumido) - Convert.ToInt32(monto);
+
+
+                                    negocio.pagartarjeta(id, Convert.ToString(md2), Convert.ToString(mc2), cuenta, monto, Convert.ToString(saldo2));
+                                    negocio.ahistorialtarjeta(tarjetas.Numero_Tarjeta, monto, Convert.ToString(mc2), Convert.ToString(md2));
+
+                                }
 
                             }
                         }
                     }
                 }
             }
-
-
 
             return View();
         }
