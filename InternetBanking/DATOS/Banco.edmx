@@ -40,7 +40,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Id_usuario" Type="int" />
           <Property Name="Monto_pendiente" Type="int" />
           <Property Name="Cuotas" Type="varchar" MaxLength="100" />
@@ -371,7 +371,7 @@ advertencia 6002: La tabla o vista 'Banco.dbo.CvTarjetas' no tiene definida ning
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Id_usuario" Type="Int32" />
           <Property Name="Monto_pendiente" Type="Int32" />
           <Property Name="Cuotas" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />

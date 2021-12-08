@@ -33,9 +33,9 @@ CONSTRAINT FK_Usuario_TCredito FOREIGN KEY (Id_usuario) REFERENCES Usuarios (Id)
 
 CREATE TABLE Prestamos
 (
-Id INT PRIMARY KEY,
+Id INT IDENTITY(0,1) PRIMARY KEY,
 Id_usuario INT,
-Monto_inicial INT,
+Monto_pendiente INT,
 Cuotas VARCHAR(100),
 Estatus VARCHAR
 CONSTRAINT FK_Usuario_Prestamo FOREIGN KEY (Id_usuario) REFERENCES Usuarios (Id)
@@ -128,5 +128,7 @@ ALTER TABLE Tarjetas_Credito ADD Limite INT;
 ALTER TABLE Usuarios ADD Status Char(1);
 
 ALTER TABLE Historial_Prestamos ALTER COLUMN Fecha DATETIME;
+
+alter table Prestamos alter column ;
 
 insert into Usuarios values ('Erick', 'Betances', 'erickbetances209@gmail.com', 'Erick', '40212486837', 'Villa Consuelo', 'Administrador', 'A')
